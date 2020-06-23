@@ -20,7 +20,7 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('chat message', formatMessage('Chatt Bot', `${user.username} has joined the chat`));
     })
 
-    socket.emit('chat message', formatMessage('Chatt Bot', 'Welcome to Chatt!'));
+    socket.emit('chat message', formatMessage('Chatt Bot', 'Welcome to Chatt! Type something to begin'));
 
     socket.on('chat message', msg => {
         const user = getCurrentUser(socket.id);
