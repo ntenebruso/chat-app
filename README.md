@@ -8,7 +8,7 @@ A chat app made using express, socket, and node.js.
 
 ### NPM
 
-```powershell
+```Batchfile
 git clone https://github.com/nickforthewin/chat-app.git
 npm install
 npm start
@@ -18,7 +18,7 @@ Open `localhost:3000` in your browser to see the webpage.
 
 ### Yarn
 
-```powershell
+```Batchfile
 git clone https://github.com/nickforthewin/chat-app.git
 yarn install
 yarn start
