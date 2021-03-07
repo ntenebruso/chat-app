@@ -39,6 +39,10 @@
         nameSelected = true;
     }
 
+    function disconnect() {
+        socket.disconnect();
+    }
+
     onMount(() => {
         socket = io();
         socket.on("get user id", userId => id = userId);
@@ -58,7 +62,7 @@
 
 <div class="container">
     <div class="header">
-        <a href="/"><span data-feather="arrow-left"></span> Back to home</a>
+        <a href="/" on:click={disconnect}><span data-feather="arrow-left"></span> Back to home</a>
         <h2>{matchedRoom.name}</h2>
     </div>
 
