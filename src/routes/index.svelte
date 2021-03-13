@@ -35,8 +35,8 @@
         <div class="create-wrapper">
             <button on:click={handleClick} class="btn">New Room</button>
             {#if createRoomPopup}
-                <form bind:this={createRoomForm} class="create-form">
-                    <input type="text" placeholder="Room name" bind:this={roomNameInput}>
+                <form bind:this={createRoomForm} class="create-form" action="/api/createroom" method="POST">
+                    <input name="room" type="text" placeholder="Room name" bind:this={roomNameInput}>
                     <button class="btn" type="submit">Create</button>
                 </form>
             {/if}

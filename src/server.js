@@ -5,18 +5,12 @@ import express from 'express';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
 
-import { createRoom, getRoom, getAllRooms, getUser } from './utils/rooms';
-
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
-
-app.get('/api/rooms', (req, res) => {
-    res.json(getAllRooms());
-})
 
 app.use(
     compression({ threshold: 0 }),
