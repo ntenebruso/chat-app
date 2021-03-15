@@ -11,7 +11,7 @@ function createRoom(room) {
 }
 
 function getRoom(roomSlug) {
-    var foundRoom = rooms.find(room => room.slug == roomSlug);
+    var foundRoom = rooms.find(room => room.slug.toUpperCase() == roomSlug.toUpperCase());
     return foundRoom;
 }
 

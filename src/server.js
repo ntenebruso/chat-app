@@ -5,12 +5,16 @@ import express from 'express';
 import compression from 'compression';
 import * as sapper from '@sapper/server';
 
+import { createRoom, getRoom, getUser, getAllRooms } from "./utils/rooms";
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
+
+app.use(express.urlencoded({ extended: true }))
 
 app.use(
     compression({ threshold: 0 }),
@@ -28,7 +32,7 @@ io.on('connection', socket => {
         getRoom(room).users.push({ id: socket.id, name })
     });
     socket.on("chat message", (room, msg) => {
-        io.in(room).emit("chat message", { message: msg, user: getUser(room, socket.id) });
+        io.in(room).emit("chat message", { message: msg.trim(), user: getUser(room, socket.id) });
     });
     socket.on("disconnect", () => {
         getAllRooms().forEach(room => {

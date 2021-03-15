@@ -12,12 +12,13 @@
 </script>
 
 <script>
-    import { onMount } from "svelte";
+    import { onMount, afterUpdate } from "svelte";
     export let slug;
     export let matchedRoom;
     let msgInput;
     let nameInput;
     let msgWrapper;
+    let containerElement;
     let socket;
     let nameSelected = false;
 
@@ -49,18 +50,23 @@
 
         socket.on("chat message", msg => {
             messages = [...messages, msg];
-            msgWrapper.scrollTop = msgWrapper.scrollHeight;
         });
 
         feather.replace({width: '1em', height: '1em'});
     })
+
+    afterUpdate(() => {
+        if (msgWrapper) {
+            msgWrapper.scrollTop = msgWrapper.scrollHeight;
+        }
+    });
 </script>
 
 <svelte:head>
     <title>{matchedRoom.name}</title>
 </svelte:head>
 
-<div class="container">
+<div class="container" bind:this={containerElement}>
     <div class="header">
         <a href="/" on:click={disconnect}><span data-feather="arrow-left"></span> Back to home</a>
         <h2>{matchedRoom.name}</h2>

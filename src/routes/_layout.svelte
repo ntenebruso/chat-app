@@ -4,5 +4,6 @@
 </script>
 
 <main>
+    <h1 class="website-title">CHATT</h1>
     <slot></slot>
 </main>
