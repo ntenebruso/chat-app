@@ -8,6 +8,6 @@ export async function post(req, res, next) {
         res.json({ error: "Room name taken" });
     } else {
         createRoom(req.body.room);
-        res.redirect("/");
+        res.redirect("/rooms");
     }
 }

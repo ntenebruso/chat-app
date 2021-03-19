@@ -1,5 +1,5 @@
 <script context="module">
-    export async function preload(page) {
+    export async function preload(page, { user, loggedIn }) {
         const { slug } = page.params;
         var res = await this.fetch("/api/rooms/");
         var rooms = await res.json();
@@ -7,7 +7,7 @@
         if (!matchedRoom) {
             this.redirect(301, "/");
         }
-        return { slug, matchedRoom };
+        return { slug, matchedRoom, user, loggedIn };
     }
 </script>
 
@@ -15,6 +15,8 @@
     import { onMount, afterUpdate } from "svelte";
     export let slug;
     export let matchedRoom;
+    export let user;
+    export let loggedIn;
     let msgInput;
     let nameInput;
     let msgWrapper;
@@ -48,6 +50,11 @@
         socket = io();
         socket.on("get user id", userId => id = userId);
 
+        if (loggedIn) {
+            nameSelected = true;
+            socket.emit("new user", room, user.displayName);
+        }
+
         socket.on("chat message", msg => {
             messages = [...messages, msg];
         });
@@ -68,7 +75,7 @@
 
 <div class="container" bind:this={containerElement}>
     <div class="header">
-        <a href="/" on:click={disconnect}><span data-feather="arrow-left"></span> Back to home</a>
+        <a href="/rooms" on:click={disconnect}><span data-feather="arrow-left"></span> Back to home</a>
         <h2>{matchedRoom.name}</h2>
     </div>
 
