@@ -1,8 +1,9 @@
 import { OAuth2Strategy } from "passport-google-oauth";
+import 'dotenv/config';
 
 var GoogleStrategy = new OAuth2Strategy({
-    clientID: "1009097666797-uhn2u1uahjoo7d9loh1tqs7eijhee6nr.apps.googleusercontent.com",
-    clientSecret: "dytScghaMzJ1oelxGumXkHtu",
+    clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
     callbackURL: "/auth/callback"
 },
 function(accessToken, refreshToken, profile, done) {

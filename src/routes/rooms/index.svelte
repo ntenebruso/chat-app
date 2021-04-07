@@ -45,7 +45,7 @@
             {/if}
         </div>
         {#if loggedIn}
-        <h4>Signed in as {user.displayName}</h4>
+        <h4>Signed in as {user.displayName} ({user.emails[0].value})</h4>
         {/if}
         {#each rooms as room}
         <div class="room-display">

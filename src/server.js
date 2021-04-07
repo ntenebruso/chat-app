@@ -7,6 +7,7 @@ import * as sapper from '@sapper/server';
 import passport from "passport";
 import GoogleStrategy from "./utils/passport-config";
 import session from "express-session";
+import 'dotenv/config';
 
 import { createRoom, getRoom, getUser, getAllRooms } from "./utils/rooms";
 
@@ -43,7 +44,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // Auth Routes
-app.get('/auth/login', passport.authenticate('google', { scope: "profile" }));
+app.get('/auth/login', passport.authenticate('google', { scope: ["profile", "email"] }));
 app.get('/auth/callback', passport.authenticate('google'), (req, res) => {
     res.redirect('/');
 });
